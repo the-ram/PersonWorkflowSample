@@ -1,0 +1,88 @@
+databaseChangeLog:
+- changeSet:
+    id: 1
+    author: RGOVIND
+    validCheckSum:
+    - ANY
+    changes:
+    - createTable:
+        tableName: Person
+        columns:
+        - column:
+            name: PersonId
+            type: BIGINT
+            constraints:
+              primaryKey: true
+              nullable: false
+        - column:
+            name: PersonName
+            type: VARCHAR(100)
+            constraints:
+              nullable: false
+        - column:
+            name: Discriminator
+            type: VARCHAR(6)
+            constraints:
+              nullable: false
+        - column:
+            name: AddressLine1
+            type: VARCHAR(100)
+        - column:
+            name: AddressLine2
+            type: VARCHAR(100)
+        - column:
+            name: State
+            type: VARCHAR(100)
+        - column:
+            name: Country
+            type: VARCHAR(100)
+        - column:
+            name: Zip
+            type: VARCHAR(10)
+        - column:
+            name: LastUpdated
+            type: BIGINT
+    - createTable:
+        tableName: Contact
+        columns:
+        - column:
+            name: ContactId
+            type: BIGINT
+            constraints:
+              primaryKey: true
+              nullable: false
+        - column:
+            name: EMail
+            type: Varchar(100)
+        - column:
+            name: PhoneNumber
+            type: VARCHAR(20)
+        - column:
+            name: PersonId
+            type: BIGINT
+    
+    - addAutoIncrement: 
+#        catalogName: cat
+        columnDataType: BIGINT
+        columnName: PersonId
+        incrementBy: 1
+        startWith: 100
+        tableName: Person
+    - addAutoIncrement: 
+#        catalogName: cat
+        columnDataType: BIGINT
+        columnName: ContactId
+        incrementBy: 1
+        startWith: 100
+        tableName: Contact
+        
+    - addForeignKeyConstraint:
+        baseColumnNames: PersonId
+        baseTableName: Contact
+        constraintName: fk_contact_person
+        #deferrable: true
+        #initiallyDeferred: true
+        onDelete: CASCADE
+        onUpdate: RESTRICT
+        referencedColumnNames: PersonId
+        referencedTableName: Person

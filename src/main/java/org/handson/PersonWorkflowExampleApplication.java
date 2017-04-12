@@ -1,12 +1,12 @@
-package com.personsample.spring;
+package org.handson;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PersonWorkflowSampleApplication {
+public class PersonWorkflowExampleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PersonWorkflowSampleApplication.class, args);
+		SpringApplication.run(PersonWorkflowExampleApplication.class, args);
 	}
 }
